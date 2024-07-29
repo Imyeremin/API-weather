@@ -1,22 +1,24 @@
 const apiKey = "f86a408c1e5a6ebd1e5c569b56031e69";
 //  const apiURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`;
 
-
-
 const start = document.getElementById("sub");
 start.onclick = async (e) => {
   e.preventDefault();
-  console.log('--------------------------------------------------------------------')
+  console.log(
+    "--------------------------------------------------------------------"
+  );
   const city = getData();
   const dataApi = await run(city);
-  console.log(dataApi)
+  console.log(dataApi);
   const dataApi2 = await run2(city);
-  console.log(dataApi2)
+  console.log(dataApi2);
   creatingPages(dataApi, dataApi2);
 };
 
 const getData = () => {
   const city = document.getElementById("cityName").value;
+  const cityHeader = document.querySelector(".navbar-brand");
+  cityHeader.innerText = city;
   return city;
 };
 
@@ -25,9 +27,14 @@ const run = async (city) => {
   try {
     resp = await fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
-    );  
+    );
   } catch (e) {
-    console.log(e);
+    const container = document.getElementById("container");
+    container.innerHTML = `
+  <div height="100vh" class="error">
+  <img width="100%" height="100%" src="scale_1200.png" alt="" />
+  </div>
+  `;
     return;
   }
   return resp.json();
@@ -36,10 +43,15 @@ const run2 = async (city) => {
   let resp = null;
   try {
     resp = await fetch(
-       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
     );
   } catch (e) {
-    console.log(e);
+    const container = document.getElementById("container");
+    container.innerHTML = `
+  <div height="100vh" class="error">
+  <img width="100%" height="100%" src="scale_1200.png" alt="" />
+  </div>
+  `;
     return;
   }
   return resp.json();
@@ -61,12 +73,20 @@ const creatingPages = (data, dataNow) => {
         </div>
         <div>
           <span class="fs-1">${Math.floor(dataNow.main.temp - 273)}°C</span>
-          <span class="fs-6 fw-light d-block">Real Feel ${Math.floor(dataNow.main.feels_like - 273)}°C</span>
+          <span class="fs-6 fw-light d-block">Real Feel ${Math.floor(
+            dataNow.main.feels_like - 273
+          )}°C</span>
         </div>
         <div>
-          <span class="fs-5 d-block">Sunrise: ${dataNow.sys.sunrise} AM</span>
-          <span class="fs-5 d-block">Sunset:  ${dataNow.sys.sunset} AM</span>
-          <span class="fs-5 d-block">Duration:${1} AM</span>
+          <span class="fs-5 d-block">Sunrise: ${new Date(
+            dataNow.sys.sunrise * 1000
+          ).toLocaleTimeString()} </span>
+          <span class="fs-5 d-block">Sunset:  ${new Date(
+            dataNow.sys.sunset * 1000
+          ).toLocaleTimeString()} </span>
+          <span class="fs-5 d-block">Duration:${new Date(
+            (dataNow.sys.sunset - dataNow.sys.sunrise) * 1000
+          ).toLocaleTimeString()} </span>
         </div>
       </div>
     </div>
@@ -81,12 +101,24 @@ const creatingPages = (data, dataNow) => {
             <thead>
               <tr>
                 <th scope="col">TODAY</th>
-                <th scope="col">${data.list[0].dt_txt}</th>
-                <th scope="col">${data.list[1].dt_txt}</th>
-                <th scope="col">${data.list[2].dt_txt}</th>
-                <th scope="col">${data.list[3].dt_txt}</th>
-                <th scope="col">${data.list[4].dt_txt}</th>
-                <th scope="col">${data.list[5].dt_txt}</th>
+                <th scope="col">${new Date(
+                  data.list[0].dt * 1000
+                ).toLocaleTimeString()}</th>
+                <th scope="col">${new Date(
+                  data.list[1].dt * 1000
+                ).toLocaleTimeString()}</th>
+                <th scope="col">${new Date(
+                  data.list[2].dt * 1000
+                ).toLocaleTimeString()}</th>
+                <th scope="col">${new Date(
+                  data.list[3].dt * 1000
+                ).toLocaleTimeString()}</th>
+                <th scope="col">${new Date(
+                  data.list[4].dt * 1000
+                ).toLocaleTimeString()}</th>
+                <th scope="col">${new Date(
+                  data.list[5].dt * 1000
+                ).toLocaleTimeString()}</th>
               </tr>
             </thead>
             <tbody class="text-center">
@@ -168,14 +200,14 @@ const creatingPages = (data, dataNow) => {
               class="flex-fill m-1 p-2 bg-opacity-10 bg-secondary col-6 col-sm-4 d-flex justify-content-between"
             >
               <span>${1}</span>
-              <span> <img width="50px" src="sun.png" alt="" /> ${1}°C</span>
+              <span> <img width="50px" src="" alt="" /> ${1}°C</span>
             </div>
 
             <div
               class="flex-fill m-1 p-2 bg-opacity-10 bg-secondary col-6 col-sm-4 d-flex justify-content-between"
             >
               <span>${1}</span>
-              <span> <img width="50px" src="sun.png" alt="" /> ${1}°C</span>
+              <span> <img width="50px" src="" alt="" /> ${1}°C</span>
             </div>
 
             <div class="w-100 d-none d-md-block"></div>
@@ -184,14 +216,14 @@ const creatingPages = (data, dataNow) => {
               class="flex-fill m-1 p-2 bg-opacity-10 bg-secondary col-6 col-sm-4 d-flex justify-content-between"
             >
               <span>${1}</span>
-              <span> <img width="50px" src="sun.png" alt="" /> ${1}°C</span>
+              <span> <img width="50px" src="" alt="" /> ${1}°C</span>
             </div>
 
             <div
               class="flex-fill m-1 p-2 bg-opacity-10 bg-secondary col-6 col-sm-4 d-flex justify-content-between"
             >
               <span>${1}</span>
-              <span> <img width="50px" src="sun.png" alt="" /> ${1}°C</span>
+              <span> <img width="50px" src="" alt="" /> ${1}°C</span>
             </div>
           </div>
         </div>
@@ -205,10 +237,13 @@ const creatingPages = (data, dataNow) => {
 // '20.07.2024'
 // x.toLocaleTimeString()
 // '22:38:42'
-window.onload = async () =>{
-  const startData = await run('Рязань');
-const startData2 = await run2('Рязань')
-console.log(startData)
-console.log(startData2)
-creatingPages(startData, startData2);
-}
+window.onload = async () => {
+  const cityHeader = document.querySelector(".navbar-brand");
+  cityHeader.innerText = "Рязань";
+
+  const startData = await run("Рязань");
+  const startData2 = await run2("Рязань");
+  console.log(startData);
+  console.log(startData2);
+  creatingPages(startData, startData2);
+};
