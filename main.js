@@ -1,5 +1,17 @@
 const apiKey = "f86a408c1e5a6ebd1e5c569b56031e69";
-//  const apiURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`;
+// const apiURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`;
+
+let dataFeatch = [];
+
+window.onload = async () => {
+  const startData = await run("Рязань");
+  const startData2 = await run2("Рязань");
+  dataFeatch = [startData, startData2];
+  console.log(startData);
+  console.log(startData2);
+  console.log(dataFeatch);
+  creatingPages(startData, startData2);
+};
 
 const start = document.getElementById("sub");
 start.onclick = async (e) => {
@@ -12,6 +24,8 @@ start.onclick = async (e) => {
   console.log(dataApi);
   const dataApi2 = await run2(city);
   console.log(dataApi2);
+  dataFeatch = [dataApi, dataApi2];
+  console.log(dataFeatch);
   creatingPages(dataApi, dataApi2);
 };
 
@@ -58,8 +72,10 @@ const run2 = async (city) => {
 };
 const creatingPages = (data, dataNow) => {
   let x = new Date();
+  const cityHeader = document.querySelector(".navbar-brand");
+  cityHeader.innerText = data.city.name;
   const container = document.getElementById("container");
-  container.innerHTML = `<div class="container bg-light p-3 mb-3">
+  container.innerHTML = `<div class="container bg-light p-3 mt-3 mb-3">
       <div class="head fs-5 p-1 d-flex justify-content-between">
         <div>CURRENT WEATHER</div>
         <div>${x.toLocaleDateString()}</div>
@@ -231,19 +247,196 @@ const creatingPages = (data, dataNow) => {
     </div>`;
 };
 
+const btnToday = document.getElementById("btn-today");
+const btnDays = document.getElementById("btn-days");
+
+btnDays.onclick = () => {
+  creatingPagesDays(dataFeatch[0], dataFeatch[1]);
+};
+btnToday.onclick = () => {
+  creatingPages(dataFeatch[0], dataFeatch[1]);
+};
+
+const creatingPagesDays = (data, dataNow) => {
+  const containerDays = document.getElementById("container-days");
+  container.innerHTML = ` <div class="container p-3 mt-3 mb-3 d-flex">
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+        <div class="card p-" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title head">TONIGHT</h5>
+            <h6 class="card-text">JUN 30</h6>
+            <img src="..." class="card-img-top" alt="..." />
+            <h3 class="card-title">25 C</h3>
+            <p class="card-text">Clear, Warm</p>
+          </div>
+        </div>
+      </div>
+      <div class="container bg-light p-3 mb-3">
+        <div class="head fs-5 p-1 d-flex justify-content-between">
+          <div>HOURLY</div>
+        </div>
+        <div class="content d-flex alight-item-center justify-content-around">
+          <div class="container">
+            <table class="text-center table">
+              <thead>
+                <tr>
+                  <th scope="col">TODAY</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr>
+                  <th scope="row"></th>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Forecast</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Temp(°C)</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">RealFeel</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">Wind(km/h)</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>`;
+};
+
+// TEST
+// {
 // let x = new Date()
 // undefined
 // x.toLocaleDateString()
 // '20.07.2024'
 // x.toLocaleTimeString()
 // '22:38:42'
-window.onload = async () => {
-  const cityHeader = document.querySelector(".navbar-brand");
-  cityHeader.innerText = "Рязань";
 
-  const startData = await run("Рязань");
-  const startData2 = await run2("Рязань");
-  console.log(startData);
-  console.log(startData2);
-  creatingPages(startData, startData2);
-};
+// TEST
+// const run3 = async (city) => {
+//   let resp = null;
+//   let arrResp = new Array(4);
+//   let respJson = null;
+//   console.log(arrResp);
+//   for (let i = 0; i < arrResp.length; i++) {
+//     console.log(i)
+//     try {
+//       resp = await fetch(
+//         `https://api.openweathermap.org/data/2.5/weather?id=2172797}&appid=${apiKey}`
+//       );
+//     } catch (e) {
+//       console.log(e);
+//       const container = document.getElementById("container");
+//       container.innerHTML = `
+//   <div height="100vh" class="error">
+//   <img width="100%" height="100%" src="scale_1200.png" alt="" />
+//   </div>
+//   `;
+//       return;
+//     }
+
+//     respJson = resp.json();
+//     arrResp.push(respJson);
+//   }
+//   console.log(respJson);
+//   return;
+// };
+
+// run3();
+// TEST
+// }
+// TEST

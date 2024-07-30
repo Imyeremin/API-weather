@@ -6,3 +6,11 @@
     border-collapse: separate;
 
 }
+.card:hover{
+    transform: scale(1.2);
+    transition: all 0.2s ease-out;  
+}
+.card:active{
+    transform: scale(1.1);
+    background-color: azure;
+}
