@@ -1,8 +1,8 @@
 const apiKey = "f86a408c1e5a6ebd1e5c569b56031e69";
 // const apiURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${city}&appid=${apiKey}`;
-
+let days = null;
 let dataFeatch = [];
-
+const arrDays = ["1", "2", "3", "4", "5", "6", "7"];
 window.onload = async () => {
   const startData = await run("Рязань");
   const startData2 = await run2("Рязань");
@@ -39,9 +39,8 @@ const getData = () => {
 const run = async (city) => {
   let resp = null;
   try {
-    resp = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
-    );
+    resp = await fetch();
+    // `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
   } catch (e) {
     const container = document.getElementById("container");
     container.innerHTML = `
@@ -56,9 +55,8 @@ const run = async (city) => {
 const run2 = async (city) => {
   let resp = null;
   try {
-    resp = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-    );
+    resp = await fetch();
+    // `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
   } catch (e) {
     const container = document.getElementById("container");
     container.innerHTML = `
@@ -250,8 +248,9 @@ const creatingPages = (data, dataNow) => {
 const btnToday = document.getElementById("btn-today");
 const btnDays = document.getElementById("btn-days");
 
-btnDays.onclick = () => {
+btnDays.onclick = async () => {
   creatingPagesDays(dataFeatch[0], dataFeatch[1]);
+  initDays();
 };
 btnToday.onclick = () => {
   creatingPages(dataFeatch[0], dataFeatch[1]);
@@ -260,7 +259,7 @@ btnToday.onclick = () => {
 const creatingPagesDays = (data, dataNow) => {
   const containerDays = document.getElementById("container-days");
   container.innerHTML = ` <div class="container p-3 mt-3 mb-3 d-flex">
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -269,7 +268,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -278,7 +277,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -287,7 +286,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -296,7 +295,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -305,7 +304,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -314,7 +313,7 @@ const creatingPagesDays = (data, dataNow) => {
             <p class="card-text">Clear, Warm</p>
           </div>
         </div>
-        <div class="card p-" style="width: 18rem">
+        <div class="card day" style="width: 18rem">
           <div class="card-body">
             <h5 class="card-title head">TONIGHT</h5>
             <h6 class="card-text">JUN 30</h6>
@@ -324,7 +323,7 @@ const creatingPagesDays = (data, dataNow) => {
           </div>
         </div>
       </div>
-      <div class="container bg-light p-3 mb-3">
+      <div class="container initday bg-light p-3 mb-3">
         <div class="head fs-5 p-1 d-flex justify-content-between">
           <div>HOURLY</div>
         </div>
@@ -395,48 +394,89 @@ const creatingPagesDays = (data, dataNow) => {
           </div>
         </div>
       </div>`;
+  days = document.querySelectorAll(".day");
+  console.log(days);
+};
+const initDays = () => {
+  const contentDay = document.querySelector(".initday");
+  days.forEach((day, i) => {
+    day.onclick = () => {
+      contentDay.innerHTML = `<div class="head fs-5 p-1 d-flex justify-content-between">
+          <div>${i}</div>
+        </div>
+        <div class="content d-flex alight-item-center justify-content-around">
+          <div class="container">
+            <table class="text-center table">
+              <thead>
+                <tr>
+                  <th scope="col">TODAY</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                  <th scope="col">1</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr>
+                  <th scope="row"></th>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                  <td><img width="100px" src="" alt="" /></td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Forecast</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Temp(°C)</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">RealFeel</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">Wind(km/h)</th>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>`;
+    };
+  });
 };
 
-// TEST
-// {
-// let x = new Date()
-// undefined
-// x.toLocaleDateString()
-// '20.07.2024'
-// x.toLocaleTimeString()
-// '22:38:42'
+
+
 
 // TEST
-// const run3 = async (city) => {
-//   let resp = null;
-//   let arrResp = new Array(4);
-//   let respJson = null;
-//   console.log(arrResp);
-//   for (let i = 0; i < arrResp.length; i++) {
-//     console.log(i)
-//     try {
-//       resp = await fetch(
-//         `https://api.openweathermap.org/data/2.5/weather?id=2172797}&appid=${apiKey}`
-//       );
-//     } catch (e) {
-//       console.log(e);
-//       const container = document.getElementById("container");
-//       container.innerHTML = `
-//   <div height="100vh" class="error">
-//   <img width="100%" height="100%" src="scale_1200.png" alt="" />
-//   </div>
-//   `;
-//       return;
-//     }
 
-//     respJson = resp.json();
-//     arrResp.push(respJson);
-//   }
-//   console.log(respJson);
-//   return;
-// };
-
-// run3();
-// TEST
-// }
 // TEST
