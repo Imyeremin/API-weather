@@ -12,5 +12,5 @@
 }
 .card:active{
     transform: scale(1.1);
-    background-color: azure;
+    background-color: rgb(92, 161, 161);
 }
