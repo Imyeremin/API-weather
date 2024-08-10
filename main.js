@@ -252,8 +252,8 @@ const btnDays = document.getElementById("btn-days");
 
 btnDays.onclick = async () => {
   creatingPagesDays(dataFeatch[0]);
-  const arrData =  fillingWithData(dataFeatch[0])
-  console.log(arrData)
+  const arrData = fillingWithData(dataFeatch[0]);
+  console.log(arrData);
   initDays(arrData);
 };
 btnToday.onclick = () => {
@@ -484,119 +484,133 @@ const initDays = (data) => {
   days.forEach((day, i) => {
     day.onclick = () => {
       contentDay.innerHTML = `<div class="head fs-5 p-1 d-flex justify-content-between">
-        <div>${i}</div>
-      </div>
-      <div class="content d-flex alight-item-center justify-content-around">
-        <div class="container">
-          <table class="text-center table">
-            <thead>
-              <tr>
-                <th scope="col">TODAY</th>
-                <th scope="col">${new Date(
-                  data.list[0].dt * 1000
-                ).toLocaleTimeString()}</th>
-                <th scope="col">${new Date(
-                  data.list[1].dt * 1000
-                ).toLocaleTimeString()}</th>
-                <th scope="col">${new Date(
-                  data.list[2].dt * 1000
-                ).toLocaleTimeString()}</th>
-                <th scope="col">${new Date(
-                  data.list[3].dt * 1000
-                ).toLocaleTimeString()}</th>
-                <th scope="col">${new Date(
-                  data.list[4].dt * 1000
-                ).toLocaleTimeString()}</th>
-                <th scope="col">${new Date(
-                  data.list[5].dt * 1000
-                ).toLocaleTimeString()}</th>
-              </tr>
-            </thead>
-            <tbody class="text-center">
-              <tr>
-                <th scope="row"></th>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[0].weather[0].icon
-                }.png" alt="" /></td>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[1].weather[0].icon
-                }.png" alt="" /></td>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[2].weather[0].icon
-                }.png" alt="" /></td>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[3].weather[0].icon
-                }.png" alt="" /></td>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[4].weather[0].icon
-                }.png" alt="" /></td>
-                <td><img width="100px" src="http://openweathermap.org/img/w/${
-                  data.list[5].weather[0].icon
-                }.png" alt="" /></td>
-              </tr>
-
-              <tr>
-                <th class="fw-light" scope="row">Forecast</th>
-                <td>${data.list[0].weather[0].main}</td>
-                <td>${data.list[1].weather[0].main}</td>
-                <td>${data.list[2].weather[0].main}</td>
-                <td>${data.list[3].weather[0].main}</td>
-                <td>${data.list[4].weather[0].main}</td>
-                <td>${data.list[5].weather[0].main}</td>
-              </tr>
-
-              <tr>
-                <th class="fw-light" scope="row">Temp(°C)</th>
-                <td>${Math.floor(data.list[0].main.temp - 273)} °C</td>
-                <td>${Math.floor(data.list[1].main.temp - 273)} °C</td>
-                <td>${Math.floor(data.list[2].main.temp - 273)} °C</td>
-                <td>${Math.floor(data.list[3].main.temp - 273)} °C</td>
-                <td>${Math.floor(data.list[4].main.temp - 273)} °C</td>
-                <td>${Math.floor(data.list[5].main.temp - 273)} °C</td>
-              </tr>
-              <tr>
-                <th class="fw-light" scope="row">RealFeel</th>
-                <td>${Math.floor(data.list[0].main.feels_like - 273)} °C</td>
-                <td>${Math.floor(data.list[1].main.feels_like - 273)} °C</td>
-                <td>${Math.floor(data.list[2].main.feels_like - 273)} °C</td>
-                <td>${Math.floor(data.list[3].main.feels_like - 273)} °C</td>
-                <td>${Math.floor(data.list[4].main.feels_like - 273)} °C</td>
-                <td>${Math.floor(data.list[5].main.feels_like - 273)} °C</td>
-              </tr>
-              <tr>
-                <th class="fw-light" scope="row">Wind(km/h)</th>
-                <td>${(Math.floor(data.list[0].wind.speed) * 3600) / 1000}</td>
-                <td>${(Math.floor(data.list[1].wind.speed) * 3600) / 1000}</td>
-                <td>${(Math.floor(data.list[2].wind.speed) * 3600) / 1000}</td>
-                <td>${(Math.floor(data.list[3].wind.speed) * 3600) / 1000}</td>
-                <td>${(Math.floor(data.list[4].wind.speed) * 3600) / 1000}</td>
-                <td>${(Math.floor(data.list[5].wind.speed) * 3600) / 1000}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div>HOURLY</div>
         </div>
-      </div>`;
+        <div class="content d-flex alight-item-center justify-content-around">
+          <div class="container">
+            <table class="text-center table">
+              <thead>
+                <tr>
+                  <th scope="col">TODAY</th>
+                  <th scope="col">${new Date(
+                    data[i].list[0].dt * 1000
+                  ).toLocaleTimeString()}</th>
+                  <th scope="col">${new Date(
+                    data[i].list[1].dt * 1000
+                  ).toLocaleTimeString()}</th>
+                  <th scope="col">${new Date(
+                    data[i].list[2].dt * 1000
+                  ).toLocaleTimeString()}</th>
+                  <th scope="col">${new Date(
+                    data[i].list[3].dt * 1000
+                  ).toLocaleTimeString()}</th>
+                  <th scope="col">${new Date(
+                    data[i].list[4].dt * 1000
+                  ).toLocaleTimeString()}</th>
+                  <th scope="col">${new Date(
+                    data[i].list[5].dt * 1000
+                  ).toLocaleTimeString()}1</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr>
+                  <th scope="row"></th>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[0].weather[0].icon
+                  }.png" alt="" /></td>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[1].weather[0].icon
+                  }.png" alt="" /></td>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[2].weather[0].icon
+                  }.png" alt="" /></td>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[3].weather[0].icon
+                  }.png" alt="" /></td>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[4].weather[0].icon
+                  }.png" alt="" /></td>
+                  <td> <img width="100px" src="http://openweathermap.org/img/w/${
+                    data[i].list[5].weather[0].icon
+                  }.png" alt="" /></td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Forecast</th>
+                  <td>${data[i].list[0].weather[0].main}</td>
+                  <td>${data[i].list[1].weather[0].main}</td>
+                  <td>${data[i].list[2].weather[0].main}</td>
+                  <td>${data[i].list[3].weather[0].main}</td>
+                  <td>${data[i].list[4].weather[0].main}</td>
+                  <td>${data[i].list[5].weather[0].main}</td>
+                </tr>
+
+                <tr>
+                  <th class="fw-light" scope="row">Temp(°C)</th>
+                        <td>${Math.floor(data[i].list[0].main.temp - 273)}°C</td>
+                        <td>${Math.floor(data[i].list[1].main.temp - 273)}°C</td>
+                        <td>${Math.floor(data[i].list[2].main.temp - 273)}°C</td>
+                        <td>${Math.floor(data[i].list[3].main.temp - 273)}°C</td>
+                        <td>${Math.floor(data[i].list[4].main.temp - 273)}°C</td>
+                        <td>${Math.floor(data[i].list[5].main.temp - 273)}°C</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">RealFeel</th>
+                  <td>${Math.floor(data[i].list[0].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(data[i].list[1].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(data[i].list[2].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(data[i].list[3].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(data[i].list[4].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(data[i].list[5].main.feels_like - 273)} °C</td>
+                </tr>
+                <tr>
+                  <th class="fw-light" scope="row">Wind(km/h)</th>
+                  <td>${
+                    (Math.floor(data[i].list[0].wind.speed) * 3600) / 1000
+                  }</td>
+                  <td>${
+                    (Math.floor(data[i].list[1].wind.speed) * 3600) / 1000
+                  }</td>
+                  <td>${
+                    (Math.floor(data[i].list[2].wind.speed) * 3600) / 1000
+                  }</td>
+                  <td>${
+                    (Math.floor(data[i].list[3].wind.speed) * 3600) / 1000
+                  }</td>
+                  <td>${
+                    (Math.floor(data[i].list[4].wind.speed) * 3600) / 1000
+                  }</td>
+                  <td>${
+                    (Math.floor(data[i].list[5].wind.speed) * 3600) / 1000
+                  }</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>`;
     };
   });
 };
 
-// TEST
 const fillingWithData = (data) => {
   let arrPush = [];
-  let arrData = [];
-  console.log(data)
+  let arrData = {
+    list: null,
+  };
+  console.log(data);
   for (let i = 0; i < data.list.length; i++) {
     arrPush.push(data.list[i]);
     if (i == data.list.length - 1) {
-      arrData.push(arrPush);
+      arrData.list.push(arrPush);
       break;
     }
     if (arrPush.length >= 6) {
-      arrData.push(arrPush);
+      arrData.list.push(arrPush);
       arrPush = [];
     }
   }
-  console.log(arrData)
+  console.log(arrData);
   return arrData;
 };
+
+// TEST 
 // TEST
