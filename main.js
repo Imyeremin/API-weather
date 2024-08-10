@@ -483,6 +483,8 @@ const initDays = (data) => {
   const contentDay = document.querySelector(".initday");
   days.forEach((day, i) => {
     day.onclick = () => {
+      dataDay = data[i];
+      console.log(dataDay);
       contentDay.innerHTML = `<div class="head fs-5 p-1 d-flex justify-content-between">
           <div>HOURLY</div>
         </div>
@@ -493,96 +495,84 @@ const initDays = (data) => {
                 <tr>
                   <th scope="col">TODAY</th>
                   <th scope="col">${new Date(
-                    data[i].list[0].dt * 1000
+                    dataDay[0].dt * 1000
                   ).toLocaleTimeString()}</th>
                   <th scope="col">${new Date(
-                    data[i].list[1].dt * 1000
+                    dataDay[1].dt * 1000
                   ).toLocaleTimeString()}</th>
                   <th scope="col">${new Date(
-                    data[i].list[2].dt * 1000
+                    dataDay[2].dt * 1000
                   ).toLocaleTimeString()}</th>
                   <th scope="col">${new Date(
-                    data[i].list[3].dt * 1000
+                    dataDay[3].dt * 1000
                   ).toLocaleTimeString()}</th>
                   <th scope="col">${new Date(
-                    data[i].list[4].dt * 1000
+                    dataDay[4].dt * 1000
                   ).toLocaleTimeString()}</th>
                   <th scope="col">${new Date(
-                    data[i].list[5].dt * 1000
-                  ).toLocaleTimeString()}1</th>
+                    dataDay[5].dt * 1000
+                  ).toLocaleTimeString()}</th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 <tr>
                   <th scope="row"></th>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[0].weather[0].icon
+                    dataDay[0].weather[0].icon
                   }.png" alt="" /></td>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[1].weather[0].icon
+                    dataDay[1].weather[0].icon
                   }.png" alt="" /></td>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[2].weather[0].icon
+                    dataDay[2].weather[0].icon
                   }.png" alt="" /></td>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[3].weather[0].icon
+                    dataDay[3].weather[0].icon
                   }.png" alt="" /></td>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[4].weather[0].icon
+                    dataDay[4].weather[0].icon
                   }.png" alt="" /></td>
                   <td> <img width="100px" src="http://openweathermap.org/img/w/${
-                    data[i].list[5].weather[0].icon
+                    dataDay[5].weather[0].icon
                   }.png" alt="" /></td>
                 </tr>
 
                 <tr>
                   <th class="fw-light" scope="row">Forecast</th>
-                  <td>${data[i].list[0].weather[0].main}</td>
-                  <td>${data[i].list[1].weather[0].main}</td>
-                  <td>${data[i].list[2].weather[0].main}</td>
-                  <td>${data[i].list[3].weather[0].main}</td>
-                  <td>${data[i].list[4].weather[0].main}</td>
-                  <td>${data[i].list[5].weather[0].main}</td>
+                  <td>${dataDay[0].weather[0].main}</td>
+                  <td>${dataDay[1].weather[0].main}</td>
+                  <td>${dataDay[2].weather[0].main}</td>
+                  <td>${dataDay[3].weather[0].main}</td>
+                  <td>${dataDay[4].weather[0].main}</td>
+                  <td>${dataDay[5].weather[0].main}</td>
                 </tr>
 
                 <tr>
                   <th class="fw-light" scope="row">Temp(°C)</th>
-                        <td>${Math.floor(data[i].list[0].main.temp - 273)}°C</td>
-                        <td>${Math.floor(data[i].list[1].main.temp - 273)}°C</td>
-                        <td>${Math.floor(data[i].list[2].main.temp - 273)}°C</td>
-                        <td>${Math.floor(data[i].list[3].main.temp - 273)}°C</td>
-                        <td>${Math.floor(data[i].list[4].main.temp - 273)}°C</td>
-                        <td>${Math.floor(data[i].list[5].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[0].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[1].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[2].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[3].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[4].main.temp - 273)}°C</td>
+                        <td>${Math.floor(dataDay[5].main.temp - 273)}°C</td>
                 </tr>
                 <tr>
                   <th class="fw-light" scope="row">RealFeel</th>
-                  <td>${Math.floor(data[i].list[0].main.feels_like - 273)} °C</td>
-                  <td>${Math.floor(data[i].list[1].main.feels_like - 273)} °C</td>
-                  <td>${Math.floor(data[i].list[2].main.feels_like - 273)} °C</td>
-                  <td>${Math.floor(data[i].list[3].main.feels_like - 273)} °C</td>
-                  <td>${Math.floor(data[i].list[4].main.feels_like - 273)} °C</td>
-                  <td>${Math.floor(data[i].list[5].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[0].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[1].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[2].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[3].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[4].main.feels_like - 273)} °C</td>
+                  <td>${Math.floor(dataDay[5].main.feels_like - 273)} °C</td>
                 </tr>
                 <tr>
                   <th class="fw-light" scope="row">Wind(km/h)</th>
-                  <td>${
-                    (Math.floor(data[i].list[0].wind.speed) * 3600) / 1000
-                  }</td>
-                  <td>${
-                    (Math.floor(data[i].list[1].wind.speed) * 3600) / 1000
-                  }</td>
-                  <td>${
-                    (Math.floor(data[i].list[2].wind.speed) * 3600) / 1000
-                  }</td>
-                  <td>${
-                    (Math.floor(data[i].list[3].wind.speed) * 3600) / 1000
-                  }</td>
-                  <td>${
-                    (Math.floor(data[i].list[4].wind.speed) * 3600) / 1000
-                  }</td>
-                  <td>${
-                    (Math.floor(data[i].list[5].wind.speed) * 3600) / 1000
-                  }</td>
+                  <td>${(Math.floor(dataDay[0].wind.speed) * 3600) / 1000}</td>
+                  <td>${(Math.floor(dataDay[1].wind.speed) * 3600) / 1000}</td>
+                  <td>${(Math.floor(dataDay[2].wind.speed) * 3600) / 1000}</td>
+                  <td>${(Math.floor(dataDay[3].wind.speed) * 3600) / 1000}</td>
+                  <td>${(Math.floor(dataDay[4].wind.speed) * 3600) / 1000}</td>
+                  <td>${(Math.floor(dataDay[5].wind.speed) * 3600) / 1000}</td>
                 </tr>
               </tbody>
             </table>
@@ -593,24 +583,24 @@ const initDays = (data) => {
 
 const fillingWithData = (data) => {
   let arrPush = [];
-  let arrData = {
-    list: null,
-  };
+  let arrData = [];
   console.log(data);
   for (let i = 0; i < data.list.length; i++) {
     arrPush.push(data.list[i]);
     if (i == data.list.length - 1) {
-      arrData.list.push(arrPush);
+      arrData.push(arrPush);
       break;
     }
     if (arrPush.length >= 6) {
-      arrData.list.push(arrPush);
+      arrData.push(arrPush);
       arrPush = [];
     }
   }
   console.log(arrData);
+  console.log(arrData[1]);
   return arrData;
 };
 
-// TEST 
+// TEST
+
 // TEST
