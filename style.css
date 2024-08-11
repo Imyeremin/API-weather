@@ -16,3 +16,7 @@
     transform: scale(1.1);
     background-color: rgb(92, 161, 161);
 }
+
+.initday {
+    transition: all 0.2s ease-in-out;
+}

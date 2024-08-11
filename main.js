@@ -261,7 +261,7 @@ btnToday.onclick = () => {
 };
 
 const creatingPagesDays = (data) => {
-  const containerDays = document.getElementById("container-days");
+  container.style.opacity = "0";
   container.innerHTML = ` <div class="container p-3 mt-3 mb-3 d-flex">
         <div class="card day" style="width: 18rem">
           <div class="card-body">
@@ -476,13 +476,17 @@ const creatingPagesDays = (data) => {
           </div>
         </div>
       </div>`;
+  container.style.opacity = "1";
   days = document.querySelectorAll(".day");
   console.log(days);
 };
 const initDays = (data) => {
   const contentDay = document.querySelector(".initday");
+
   days.forEach((day, i) => {
     day.onclick = () => {
+      contentDay.style.opacity = "0";
+
       dataDay = data[i];
       console.log(dataDay);
       contentDay.innerHTML = `<div class="head fs-5 p-1 d-flex justify-content-between">
@@ -577,6 +581,7 @@ const initDays = (data) => {
               </tbody>
             </table>
           </div>`;
+      contentDay.style.opacity = "1";
     };
   });
 };
